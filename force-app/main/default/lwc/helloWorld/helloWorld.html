@@ -1,0 +1,55 @@
+<template>
+    <lightning-card title="Hello World" icon-name="utility:user">
+        <div class="slds-p-around_medium">
+
+            <!-- 名前入力エリア -->
+            <div class="slds-form-element slds-m-bottom_medium">
+                <label class="slds-form-element__label" for="nameInput">名前を入力</label>
+                <div class="slds-form-element__control">
+                    <input
+                        id="nameInput"
+                        type="text"
+                        class="slds-input"
+                        placeholder="例：田中"
+                        value={name}
+                        oninput={handleNameChange}
+                    />
+                </div>
+            </div>
+
+            <!-- 挨拶メッセージ（名前が入力されている場合のみ表示） -->
+            <template if:true={hasName}>
+                <div class="slds-box slds-theme_shade slds-m-bottom_medium">
+                    <p class="slds-text-heading_small">{greetingMessage}</p>
+                </div>
+            </template>
+
+            <!-- 表示切り替えボタン -->
+            <div class="slds-m-bottom_medium">
+                <lightning-button
+                    label={toggleLabel}
+                    onclick={handleToggle}
+                    variant="neutral"
+                ></lightning-button>
+            </div>
+
+            <!-- トグルで表示・非表示が切り替わるメッセージ -->
+            <template if:true={isVisible}>
+                <div class="slds-box slds-theme_success">
+                    <p>LWCのテンプレート構文（if:true）で表示を制御しています！</p>
+                </div>
+            </template>
+
+            <!-- リストの繰り返し表示 -->
+            <div class="slds-m-top_medium">
+                <p class="slds-text-title_caps slds-m-bottom_small">学べること一覧</p>
+                <ul class="slds-list_dotted">
+                    <template for:each={learningItems} for:item="item">
+                        <li key={item.id} class="slds-item">{item.label}</li>
+                    </template>
+                </ul>
+            </div>
+
+        </div>
+    </lightning-card>
+</template>
